@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 class PaymentPlatformApiInterface
 {
     private static string $baseUrl = 'http://payment-platform-api.test/api';
+
     private static string $version = 'v1';
 
     private Client $client;
@@ -18,6 +19,7 @@ class PaymentPlatformApiInterface
     private array $headers;
 
     private string $endpoint;
+
     /**
      * @var mixed|string
      */
@@ -43,12 +45,12 @@ class PaymentPlatformApiInterface
         return new static($token, 'contacts/'.$key, 'PUT', $data);
     }
 
-    public function __construct(protected $token, string $endpoint, $requestType = 'GET', $data = [],)
+    public function __construct(protected $token, string $endpoint, $requestType = 'GET', $data = [])
     {
-        $this->client = new Client(['base_uri' => self::$baseUrl . '/' . self::$version . '/']);
+        $this->client = new Client(['base_uri' => self::$baseUrl.'/'.self::$version.'/']);
         $this->headers = [
-            'Authorization' => 'Bearer ' . base64_encode($token),
-            'Accept' => 'application/json'
+            'Authorization' => 'Bearer '.base64_encode($token),
+            'Accept' => 'application/json',
         ];
         $this->endpoint = $endpoint;
         $this->requestType = $requestType;
@@ -61,8 +63,6 @@ class PaymentPlatformApiInterface
     {
         return $this->client->request($this->requestType, $this->endpoint, ['headers' => $this->headers])->getBody();
     }
-
-
 }
 
 //PaymentPlatformApiInterface::updateContact('token', [])->get();
