@@ -23,6 +23,7 @@ class PaymentPlatformAPI
     private static PaymentPlatformAPI $instance;
 
     private static string $baseUrl = 'http://payment-platform-api.test/api';
+    private static string $sandBoxBaseUrl = 'http://sandbox.payment-platform-api.test/api';
 
     private Client $client;
 
@@ -34,8 +35,12 @@ class PaymentPlatformAPI
 
     private array $data;
 
-    public function __construct(protected string $token, private string $version = 'v1')
+    public function __construct(protected string $token, private string $version = 'v1', protected $sandbox = false)
     {
+        if($this->sandbox) {
+            self::$baseUrl = self::$sandBoxBaseUrl;
+        }
+
         $client = new Client(['base_uri' => self::$baseUrl.'/'.$this->version.'/']);
         $this->setClient($client);
 
