@@ -2,6 +2,10 @@
 
 All notable changes to `payment-platform-api-interface` will be documented in this file.
 
+## 0.0.3 - 2024-07-23
+
+**Full Changelog**: https://github.com/PropaySystems/payment-platform-api-interface/compare/0.0.2...0.0.3
+
 ## 0.0.2 - 2024-07-23
 
 ### What's Changed
