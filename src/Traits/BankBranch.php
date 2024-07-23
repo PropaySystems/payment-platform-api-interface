@@ -4,7 +4,6 @@ namespace PropaySystems\PaymentPlatformApiInterface\Traits;
 
 trait BankBranch
 {
-
     /**
      * Retrieves a list of bank branches based on filters and includes.
      *
@@ -14,19 +13,20 @@ trait BankBranch
      * and returns the response. This can be used to obtain various bank branches available in the system,
      * potentially filtered or enhanced with additional related resources.
      *
-     * @param array $filters Optional associative array of filters to apply to the query.
-     * @param array $includes Optional array of related resources to include in the response.
-     * @param string $version API version to use for the request, defaults to 'v1'.
+     * @param  array  $filters  Optional associative array of filters to apply to the query.
+     * @param  array  $includes  Optional array of related resources to include in the response.
+     * @param  string  $version  API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
      */
     public function getBranches(array $filters = [], array $includes = [], string $version = 'v1'): mixed
     {
         $this->setVersion($version);
         $this->setData([
-            'query' => http_build_query(['filter' => $filters, 'include' => $includes])
+            'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
         ]);
         $this->setEndpoint('bank-branches');
         $this->setRequestType('GET');
+
         return $this->execute();
     }
 
@@ -38,19 +38,20 @@ trait BankBranch
      * can be specified to use a particular version of the endpoint. The method constructs a query string
      * with the includes, sets the appropriate API endpoint, and performs a GET request to fetch the data.
      *
-     * @param string $id The unique identifier of the bank branch to retrieve.
-     * @param array $includes Optional array of related resources to include in the response.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $id  The unique identifier of the bank branch to retrieve.
+     * @param  array  $includes  Optional array of related resources to include in the response.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object.
      */
     public function getBranch(string $id, array $includes = [], string $version = 'v1'): mixed
     {
         $this->setVersion($version);
         $this->setData([
-            'query' => http_build_query(['include' => $includes])
+            'query' => http_build_query(['include' => $includes]),
         ]);
-        $this->setEndpoint('bank-branches/show/' . $id);
+        $this->setEndpoint('bank-branches/show/'.$id);
         $this->setRequestType('GET');
+
         return $this->execute();
     }
 }

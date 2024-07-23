@@ -4,7 +4,6 @@ namespace PropaySystems\PaymentPlatformApiInterface\Traits;
 
 trait Product
 {
-
     /**
      * Retrieves a list of contact products based on filters and includes.
      *
@@ -14,19 +13,20 @@ trait Product
      * and returns the response. This can be used to obtain various contact products available in the system,
      * potentially filtered or enhanced with additional related resources.
      *
-     * @param array $filters Optional associative array of filters to apply to the query.
-     * @param array $includes Optional array of related resources to include in the response.
-     * @param string $version API version to use for the request, defaults to 'v1'.
+     * @param  array  $filters  Optional associative array of filters to apply to the query.
+     * @param  array  $includes  Optional array of related resources to include in the response.
+     * @param  string  $version  API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
      */
     public function getContactProducts(array $filters = [], array $includes = [], string $version = 'v1'): mixed
     {
         $this->setVersion($version);
         $this->setData([
-            'query' => http_build_query(['filter' => $filters, 'include' => $includes])
+            'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
         ]);
         $this->setEndpoint('contact-product');
         $this->setRequestType('GET');
+
         return $this->execute();
     }
 
@@ -38,19 +38,20 @@ trait Product
      * can be specified to use a particular version of the endpoint. The method constructs a query string
      * with the includes, sets the appropriate API endpoint, and performs a GET request to fetch the data.
      *
-     * @param string $id The unique identifier of the contact product to retrieve.
-     * @param array $includes Optional array of related resources to include in the response.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $id  The unique identifier of the contact product to retrieve.
+     * @param  array  $includes  Optional array of related resources to include in the response.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object.
      */
     public function getContactProduct(string $id, array $includes = [], string $version = 'v1'): mixed
     {
         $this->setVersion($version);
         $this->setData([
-            'query' => http_build_query(['include' => $includes])
+            'query' => http_build_query(['include' => $includes]),
         ]);
-        $this->setEndpoint('contact-product/show/' . $id);
+        $this->setEndpoint('contact-product/show/'.$id);
         $this->setRequestType('GET');
+
         return $this->execute();
     }
 
@@ -62,19 +63,20 @@ trait Product
      * version of the endpoint. The method constructs the request with the provided data, sets the appropriate API
      * endpoint, and performs the request to update the contact product.
      *
-     * @param string $id The unique identifier of the contact product to update.
-     * @param array $data The data to update the contact product with.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $id  The unique identifier of the contact product to update.
+     * @param  array  $data  The data to update the contact product with.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
      */
     public function updateContactProduct(string $id, array $data = [], string $version = 'v1'): mixed
     {
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data
+            'form_params' => $data,
         ]);
-        $this->setEndpoint('contact-product/' . $id);
+        $this->setEndpoint('contact-product/'.$id);
         $this->setRequestType('PUT');
+
         return $this->execute();
     }
 
@@ -86,18 +88,19 @@ trait Product
      * a particular version of the endpoint. The method constructs the request with the provided data,
      * sets the appropriate API endpoint, and performs the request to create the contact product.
      *
-     * @param array $data The data to create the contact product with.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  array  $data  The data to create the contact product with.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
      */
     public function createContactProduct(array $data = [], string $version = 'v1'): mixed
     {
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data
+            'form_params' => $data,
         ]);
         $this->setEndpoint('contact-product');
         $this->setRequestType('POST');
+
         return $this->execute();
     }
 }

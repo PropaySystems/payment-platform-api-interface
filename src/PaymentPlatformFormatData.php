@@ -4,7 +4,6 @@ namespace PropaySystems\PaymentPlatformApiInterface;
 
 class PaymentPlatformFormatData
 {
-
     public function __construct(protected mixed $data)
     {
         //
@@ -32,7 +31,7 @@ class PaymentPlatformFormatData
     public function getArray(): mixed
     {
 
-        return !is_null(json_decode($this->data)) ? json_decode($this->data, true) : $this->error($this->data);
+        return ! is_null(json_decode($this->data)) ? json_decode($this->data, true) : $this->error($this->data);
     }
 
     /**
@@ -42,5 +41,4 @@ class PaymentPlatformFormatData
     {
         throw new \Exception($message);
     }
-
 }

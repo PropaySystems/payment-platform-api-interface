@@ -7,41 +7,48 @@ use GuzzleHttp\Exception\GuzzleException;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Address;
 use PropaySystems\PaymentPlatformApiInterface\Traits\AddressType;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Bank;
+use PropaySystems\PaymentPlatformApiInterface\Traits\BankAccount;
 use PropaySystems\PaymentPlatformApiInterface\Traits\BankAccountType;
 use PropaySystems\PaymentPlatformApiInterface\Traits\BankBranch;
 use PropaySystems\PaymentPlatformApiInterface\Traits\CDV;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Contact;
-use PropaySystems\PaymentPlatformApiInterface\Traits\BankAccount;
 use PropaySystems\PaymentPlatformApiInterface\Traits\PaymentFrequencies;
 use PropaySystems\PaymentPlatformApiInterface\Traits\PaymentMethod;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Product;
 
 class PaymentPlatformAPI
 {
-    use Contact, BankAccount, Product, Address, PaymentMethod, PaymentFrequencies, Bank, BankBranch, BankAccountType, AddressType, CDV;
+    use Address, AddressType, Bank, BankAccount, BankAccountType, BankBranch, CDV, Contact, PaymentFrequencies, PaymentMethod, Product;
 
     private static PaymentPlatformAPI $instance;
+
     private static string $baseUrl = 'http://payment-platform-api.test/api';
+
     private Client $client;
+
     private array $headers;
+
     private string $requestType;
+
     private string $endpoint;
+
     private array $data;
 
     public function __construct(protected string $token, private string $version = 'v1')
     {
-        $client = new Client(['base_uri' => self::$baseUrl . '/' . $this->version . '/']);
+        $client = new Client(['base_uri' => self::$baseUrl.'/'.$this->version.'/']);
         $this->setClient($client);
 
         $this->headers = [
-            'Authorization' => 'Bearer ' . $token,
-            'Accept' => 'application/json'
+            'Authorization' => 'Bearer '.$token,
+            'Accept' => 'application/json',
         ];
     }
 
     public function setClient(Client $client): PaymentPlatformAPI
     {
         $this->client = $client;
+
         return $this;
     }
 
@@ -53,6 +60,7 @@ class PaymentPlatformAPI
     protected function setRequestType(string $requestType): PaymentPlatformAPI
     {
         $this->requestType = $requestType;
+
         return $this;
     }
 
@@ -64,6 +72,7 @@ class PaymentPlatformAPI
     protected function setEndpoint(string $endpoint): PaymentPlatformAPI
     {
         $this->endpoint = $endpoint;
+
         return $this;
     }
 
@@ -75,6 +84,7 @@ class PaymentPlatformAPI
     protected function setData(array $data): PaymentPlatformAPI
     {
         $this->data = $data;
+
         return $this;
     }
 
@@ -86,6 +96,7 @@ class PaymentPlatformAPI
     protected function setVersion(string $version): PaymentPlatformAPI
     {
         $this->version = $version;
+
         return $this;
     }
 
@@ -109,11 +120,10 @@ class PaymentPlatformAPI
 
     public static function getInstance(string $token, string $version = 'v1'): PaymentPlatformAPI
     {
-        if (!isset(self::$instance)) {
+        if (! isset(self::$instance)) {
             self::$instance = new self($token, 'v1');
         }
 
         return self::$instance;
     }
-
 }
