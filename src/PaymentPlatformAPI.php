@@ -123,10 +123,10 @@ class PaymentPlatformAPI
 
     }
 
-    public static function getInstance(string $token, string $version = 'v1'): PaymentPlatformAPI
+    public static function getInstance(string $token, string $version = 'v1', bool $sandbox = false): PaymentPlatformAPI
     {
         if (! isset(self::$instance)) {
-            self::$instance = new self($token, 'v1');
+            self::$instance = new self($token, $version, $sandbox);
         }
 
         return self::$instance;
