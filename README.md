@@ -25,14 +25,21 @@ composer require propaysystems/payment-platform-api-interface
 ## Usage
 
 ```php
-$skeleton = new PropaySystems\PaymentPlatformApiInterface();
-echo $skeleton->echoPhrase('Hello, PropaySystems!');
+$client = new PaymentPlatformAPI('token', 'v1');
+$client = PaymentPlatformAPI::getInstance('token', 'v1'); //Singleton
+$response = $client->getContacts($filters = [], $includes = [], $version = 'v1');
 ```
 
 ## Testing
 
 ```bash
 composer test
+```
+
+## Testing Coverage Report
+
+```bash
+XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --coverage-xml=logs/coverage
 ```
 
 ## Changelog
