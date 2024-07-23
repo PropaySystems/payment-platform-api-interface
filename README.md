@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/PropaySystems/payment-platform-api-interface/actions/workflows/run-tests.yml/badge.svg)](https://github.com/PropaySystems/payment-platform-api-interface/actions/workflows/run-tests.yml)
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+This package provides an interface for integrating with the payment API, facilitating seamless interactions and transactions. It simplifies the process of connecting to the payment API by abstracting the underlying HTTP requests and responses into a more user-friendly set of PHP methods. Users can easily install this package via Composer and start integrating their applications with the payment API, leveraging its functionalities to manage contacts, initiate payments, and query transaction statuses, among other features.
 
 ## Installation
 
