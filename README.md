@@ -17,7 +17,7 @@ composer require propaysystems/payment-platform-api-interface
 ```php
 $client = new PaymentPlatformAPI('token', 'v1');
 $client = PaymentPlatformAPI::getInstance('token', 'v1'); //Singleton
-$response = $client->getContacts($filters = [], $includes = [], $version = 'v1');
+$response = $client->getContacts($filters = [], $includes = [], $version = 'v1', $sandbox = false);
 ```
 
 ## Testing
