@@ -15,8 +15,14 @@ composer require propaysystems/payment-platform-api-interface
 ## Usage
 
 ```php
-$client = new PaymentPlatformAPI('token', 'v1');
-$client = PaymentPlatformAPI::getInstance('token', 'v1'); //Singleton
+$client = PaymentPlatformAPI::getInstance() //Singleton
+         ->sandbox() //Use sandbox environment
+         ->setVersion('v1')
+         ->setCredentials('username', 'password');
+         or
+        ->setToken('132465789132465789');
+
+//Get all contacts
 $response = $client->getContacts($filters = [], $includes = [], $version = 'v1');
 ```
 

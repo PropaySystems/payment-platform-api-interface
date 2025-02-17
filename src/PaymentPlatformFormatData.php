@@ -20,6 +20,22 @@ class PaymentPlatformFormatData
     /**
      * @throws \Exception
      */
+    public function getAttributes(): mixed
+    {
+        return json_decode($this->data)->data->attributes ?? null;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function status(): int
+    {
+        return json_decode($this->data)->data->status_code ?? 404;
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function getString(): mixed
     {
         return $this->data ?? $this->error($this->data);
