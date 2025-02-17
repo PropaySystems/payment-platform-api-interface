@@ -12,13 +12,14 @@ trait Contact
      * the API version, and initiates a GET request to the 'contacts' endpoint. The response from the execution of this
      * request is returned, which may include a list of contacts along with any specified related resources.
      **
-     * @param array $filters (Optional) An associative array of filters to apply to the contact retrieval. The array keys
+     * @param  array  $filters  (Optional) An associative array of filters to apply to the contact retrieval. The array keys
      *                          and values depend on the contact model's attributes and the API's filtering capabilities.
-     * @param array $includes (Optional) An array of related resources to include in the response for each contact.
-     * @param string $version (Optional) The version of the API to target. Defaults to 'v1'.
+     * @param  array  $includes  (Optional) An array of related resources to include in the response for each contact.
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
      * @return mixed The response from the API, typically an object or array containing the list of contacts
      *               and any included related resources. The exact return type may vary depending on the implementation
      *               of the `execute` method.
+     *
      * @throws \Exception
      */
     public function getContacts(array $filters = [], array $includes = [], string $version = 'v1'): mixed
@@ -42,12 +43,13 @@ trait Contact
      * the execution of this request is returned, which may include the contact details along with any specified
      * related resources.
      *
-     * @param string $id The unique identifier of the contact to retrieve.
-     * @param array $includes (Optional) An array of related resources to include in the response.
-     * @param string $version (Optional) The version of the API to target. Defaults to 'v1'.
+     * @param  string  $id  The unique identifier of the contact to retrieve.
+     * @param  array  $includes  (Optional) An array of related resources to include in the response.
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
      * @return mixed The response from the API, typically an object or array containing the contact details
      *               and any included related resources. The exact return type may vary depending on the implementation
      *               of the `execute` method.
+     *
      * @throws \Exception
      */
     public function getContact(string $id, array $includes = [], string $version = 'v1'): mixed
@@ -71,12 +73,13 @@ trait Contact
      * contact by appending the ID to the 'contacts/' endpoint, and specifies the request type as 'PUT'.
      * Finally, it executes the request and returns the response.
      *
-     * @param string $id The unique identifier of the contact to update.
-     * @param array $data (Optional) An associative array of data to update the contact with. The array keys and values
+     * @param  string  $id  The unique identifier of the contact to update.
+     * @param  array  $data  (Optional) An associative array of data to update the contact with. The array keys and values
      *                       depend on the contact model's attributes and the API's update capabilities.
-     * @param string $version (Optional) The version of the API to target. Defaults to 'v1'.
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
      * @return mixed The response from the API, typically an object or array containing the updated contact details.
      *               The exact return type may vary depending on the implementation of the `execute` method.
+     *
      * @throws \Exception
      */
     public function updateContact(string $id, array $data = [], string $version = 'v1'): mixed
@@ -99,11 +102,12 @@ trait Contact
      * configures the data payload as form parameters, sets the endpoint to the 'contacts/' for contact creation,
      * and specifies the request type as 'POST'. Finally, it executes the request and returns the response.
      *
-     * @param array $data (Optional) An associative array of data for creating the contact. The array keys and values
+     * @param  array  $data  (Optional) An associative array of data for creating the contact. The array keys and values
      *                       should match the contact model's attributes and the API's creation capabilities.
-     * @param string $version (Optional) The version of the API to target. Defaults to 'v1'.
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
      * @return mixed The response from the API, typically an object or array containing the details of the newly created contact.
      *               The exact return type may vary depending on the implementation of the `execute` method.
+     *
      * @throws \Exception
      */
     public function createContact(array $data = [], string $version = 'v1'): mixed

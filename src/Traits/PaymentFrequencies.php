@@ -13,10 +13,11 @@ trait PaymentFrequencies
      * and returns the response. This can be used to obtain various payment frequencies available in the system,
      * potentially filtered or enhanced with additional related resources.
      *
-     * @param array $filters Optional associative array of filters to apply to the query.
-     * @param array $includes Optional array of related resources to include in the response.
-     * @param string $version API version to use for the request, defaults to 'v1'.
+     * @param  array  $filters  Optional associative array of filters to apply to the query.
+     * @param  array  $includes  Optional array of related resources to include in the response.
+     * @param  string  $version  API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
+     *
      * @throws \Exception
      */
     public function getPaymentFrequencies(array $filters = [], array $includes = [], string $version = 'v1'): mixed
@@ -40,10 +41,11 @@ trait PaymentFrequencies
      * can be specified to use a particular version of the endpoint. The method constructs a query string
      * with the includes, sets the appropriate API endpoint, and performs a GET request to fetch the data.
      *
-     * @param string $id The unique identifier of the payment frequency to retrieve.
-     * @param array $includes Optional array of related resources to include in the response.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $id  The unique identifier of the payment frequency to retrieve.
+     * @param  array  $includes  Optional array of related resources to include in the response.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object.
+     *
      * @throws \Exception
      */
     public function getPaymentFrequency(string $id, array $includes = [], string $version = 'v1'): mixed

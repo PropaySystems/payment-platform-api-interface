@@ -19,7 +19,7 @@ use PropaySystems\PaymentPlatformApiInterface\Traits\Product;
 
 class PaymentPlatformAPI
 {
-    use Address, AddressType, Bank, BankAccount, BankAccountType, BankBranch, CDV, Contact, PaymentFrequencies, PaymentMethod, Product, Auth;
+    use Address, AddressType, Auth, Bank, BankAccount, BankAccountType, BankBranch, CDV, Contact, PaymentFrequencies, PaymentMethod, Product;
 
     private static PaymentPlatformAPI $instance;
 
@@ -40,8 +40,11 @@ class PaymentPlatformAPI
     private array $data;
 
     private bool $sandbox = false;
+
     private ?string $token = null;
+
     private ?string $username = null;
+
     private ?string $password = null;
 
     public function __construct()
@@ -162,36 +165,36 @@ class PaymentPlatformAPI
     {
         self::$baseUrl = $this->sandbox ? self::$sandBoxBaseUrl : self::$baseUrl;
 
-        if (!$this->hasToken() && !$this->hasCredentials()) {
+        if (! $this->hasToken() && ! $this->hasCredentials()) {
             throw new \Exception('No credentials or token provided');
         }
 
         if ($this->hasToken()) {
 
-            $this->setClient(new Client(['base_uri' => self::$baseUrl . '/' . $this->getVersion() . '/']));
+            $this->setClient(new Client(['base_uri' => self::$baseUrl.'/'.$this->getVersion().'/']));
             $this->setHeaders([
-                'Authorization' => 'Bearer ' . $this->getToken(),
+                'Authorization' => 'Bearer '.$this->getToken(),
                 'Accept' => 'application/json',
             ]);
         }
 
         if ($this->hasCredentials()) {
 
-            $this->setClient(new Client(['base_uri' => self::$baseUrl . '/']));
+            $this->setClient(new Client(['base_uri' => self::$baseUrl.'/']));
             $this->setHeaders(['Accept' => 'application/json']);
 
             $auth = $this->login(['email' => $this->username, 'password' => $this->password], $this->getVersion());
 
             if ($auth->status() === 200) {
                 $this->setToken($auth->getAttributes()->access_token);
-                $this->setClient(new Client(['base_uri' => self::$baseUrl . '/' . $this->getVersion() . '/']));
+                $this->setClient(new Client(['base_uri' => self::$baseUrl.'/'.$this->getVersion().'/']));
                 $this->setHeaders([
-                    'Authorization' => 'Bearer ' . $this->getToken(),
+                    'Authorization' => 'Bearer '.$this->getToken(),
                     'Accept' => 'application/json',
                 ]);
             } else {
                 // Handle the error scenario
-                throw new \Exception('Authentication failed with status code: ' . $auth->status());
+                throw new \Exception('Authentication failed with status code: '.$auth->status());
             }
         }
 
@@ -204,7 +207,7 @@ class PaymentPlatformAPI
         try {
             $results = $this->client->request($this->getRequestType(), $this->getEndpoint(), $data)->getBody()->getContents();
         } catch (GuzzleException $e) {
-            throw new \Exception('API Error : ' . $e->getMessage());
+            throw new \Exception('API Error : '.$e->getMessage());
         }
 
         return new PaymentPlatformFormatData($results);
@@ -213,8 +216,8 @@ class PaymentPlatformAPI
 
     public static function getInstance(): PaymentPlatformAPI
     {
-        if (!isset(self::$instance)) {
-            self::$instance = new self();
+        if (! isset(self::$instance)) {
+            self::$instance = new self;
         }
 
         return self::$instance;

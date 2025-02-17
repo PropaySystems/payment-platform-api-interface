@@ -12,9 +12,10 @@ trait CDV
      * provided data, sets the appropriate API endpoint for CDV verification, and performs a POST request.
      * The response from the API, indicating the success or failure of the verification, is then returned.
      *
-     * @param array $data Optional associative array of customer data to verify.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  array  $data  Optional associative array of customer data to verify.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
+     *
      * @throws \Exception
      */
     public function verifyCDV(array $data = [], string $version = 'v1'): mixed
