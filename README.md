@@ -24,6 +24,7 @@ $client = PaymentPlatformAPI::getInstance() //Singleton
 
 //Get all contacts
 $response = $client->getContacts($filters = [], $includes = [], $version = 'v1');
+
 ```
 
 ## Testing
