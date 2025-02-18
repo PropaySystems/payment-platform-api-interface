@@ -17,9 +17,12 @@ trait Product
      * @param  array  $includes  Optional array of related resources to include in the response.
      * @param  string  $version  API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
+     *
+     * @throws \Exception
      */
     public function getContactProducts(array $filters = [], array $includes = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
@@ -42,9 +45,12 @@ trait Product
      * @param  array  $includes  Optional array of related resources to include in the response.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object.
+     *
+     * @throws \Exception
      */
     public function getContactProduct(string $id, array $includes = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['include' => $includes]),
@@ -67,9 +73,12 @@ trait Product
      * @param  array  $data  The data to update the contact product with.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
+     *
+     * @throws \Exception
      */
     public function updateContactProduct(string $id, array $data = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
@@ -91,9 +100,12 @@ trait Product
      * @param  array  $data  The data to create the contact product with.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
+     *
+     * @throws \Exception
      */
     public function createContactProduct(array $data = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,

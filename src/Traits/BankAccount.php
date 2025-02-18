@@ -19,9 +19,12 @@ trait BankAccount
      * @return mixed The response from the API, typically an object or array containing the list of contacts
      *               and any included related resources. The exact return type may vary depending on the implementation
      *               of the `execute` method.
+     *
+     * @throws \Exception
      */
     public function getContactBankAccounts(array $filters = [], array $includes = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
@@ -47,9 +50,12 @@ trait BankAccount
      * @return mixed The response from the API, typically an object or array containing the details of the bank account
      *               and any included related resources. The exact return type may vary depending on the implementation
      *               of the `execute` method.
+     *
+     * @throws \Exception
      */
     public function getContactBankAccount(string $id, array $includes = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['include' => $includes]),
@@ -74,9 +80,12 @@ trait BankAccount
      * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
      * @return mixed The response from the API, typically an object or array containing the updated details of the bank account.
      *               The exact return type may vary depending on the implementation of the `execute` method.
+     *
+     * @throws \Exception
      */
     public function updateContactBankAccount(string $id, array $data = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
@@ -99,9 +108,12 @@ trait BankAccount
      * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
      * @return mixed The response from the API, typically an object or array containing the details of the newly created bank account.
      *               The exact return type may vary depending on the implementation of the `execute` method.
+     *
+     * @throws \Exception
      */
     public function createContactBankAccount(array $data = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,

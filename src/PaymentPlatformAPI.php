@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Address;
 use PropaySystems\PaymentPlatformApiInterface\Traits\AddressType;
+use PropaySystems\PaymentPlatformApiInterface\Traits\Auth;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Bank;
 use PropaySystems\PaymentPlatformApiInterface\Traits\BankAccount;
 use PropaySystems\PaymentPlatformApiInterface\Traits\BankAccountType;
@@ -18,9 +19,11 @@ use PropaySystems\PaymentPlatformApiInterface\Traits\Product;
 
 class PaymentPlatformAPI
 {
-    use Address, AddressType, Bank, BankAccount, BankAccountType, BankBranch, CDV, Contact, PaymentFrequencies, PaymentMethod, Product;
+    use Address, AddressType, Auth, Bank, BankAccount, BankAccountType, BankBranch, CDV, Contact, PaymentFrequencies, PaymentMethod, Product;
 
     private static PaymentPlatformAPI $instance;
+
+    private string $version = 'v1';
 
     private static string $baseUrl = 'http://payment-platform-api.test/api';
 
@@ -36,19 +39,66 @@ class PaymentPlatformAPI
 
     private array $data;
 
-    public function __construct(protected string $token, private string $version = 'v1', protected $sandbox = false)
+    private bool $sandbox = false;
+
+    private ?string $token = null;
+
+    private ?string $username = null;
+
+    private ?string $password = null;
+
+    public function __construct()
     {
-        if ($this->sandbox) {
-            self::$baseUrl = self::$sandBoxBaseUrl;
-        }
+        //
+    }
 
-        $client = new Client(['base_uri' => self::$baseUrl.'/'.$this->version.'/']);
-        $this->setClient($client);
+    public function setVersion(string $version): PaymentPlatformAPI
+    {
+        $this->version = $version;
 
-        $this->headers = [
-            'Authorization' => 'Bearer '.$token,
-            'Accept' => 'application/json',
-        ];
+        return $this;
+    }
+
+    public function getVersion(): string
+    {
+        return $this->version;
+    }
+
+    public function sandbox(): PaymentPlatformAPI
+    {
+        $this->sandbox = true;
+
+        return $this;
+    }
+
+    public function setToken($token): PaymentPlatformAPI
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    protected function hasToken(): bool
+    {
+        return $this->token !== null;
+    }
+
+    public function setCredentials(string $username, string $password): PaymentPlatformAPI
+    {
+        $this->username = $username;
+        $this->password = $password;
+
+        return $this;
+    }
+
+    protected function hasCredentials(): bool
+    {
+        return $this->username !== null && $this->password !== null;
     }
 
     public function setClient(Client $client): PaymentPlatformAPI
@@ -61,6 +111,18 @@ class PaymentPlatformAPI
     public function getClient(): Client
     {
         return $this->client;
+    }
+
+    protected function setHeaders(array $header): PaymentPlatformAPI
+    {
+        $this->headers = $header;
+
+        return $this;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 
     protected function setRequestType(string $requestType): PaymentPlatformAPI
@@ -99,16 +161,44 @@ class PaymentPlatformAPI
         return $this->data;
     }
 
-    protected function setVersion(string $version): PaymentPlatformAPI
+    protected function init(): PaymentPlatformAPI
     {
-        $this->version = $version;
+        self::$baseUrl = $this->sandbox ? self::$sandBoxBaseUrl : self::$baseUrl;
+
+        if (! $this->hasToken() && ! $this->hasCredentials()) {
+            throw new \Exception('No credentials or token provided');
+        }
+
+        if ($this->hasToken()) {
+
+            $this->setClient(new Client(['base_uri' => self::$baseUrl.'/'.$this->getVersion().'/']));
+            $this->setHeaders([
+                'Authorization' => 'Bearer '.$this->getToken(),
+                'Accept' => 'application/json',
+            ]);
+        }
+
+        if ($this->hasCredentials()) {
+
+            $this->setClient(new Client(['base_uri' => self::$baseUrl.'/']));
+            $this->setHeaders(['Accept' => 'application/json']);
+
+            $auth = $this->login(['email' => $this->username, 'password' => $this->password], $this->getVersion());
+
+            if ($auth->status() === 200) {
+                $this->setToken($auth->getAttributes()->access_token);
+                $this->setClient(new Client(['base_uri' => self::$baseUrl.'/'.$this->getVersion().'/']));
+                $this->setHeaders([
+                    'Authorization' => 'Bearer '.$this->getToken(),
+                    'Accept' => 'application/json',
+                ]);
+            } else {
+                // Handle the error scenario
+                throw new \Exception('Authentication failed with status code: '.$auth->status());
+            }
+        }
 
         return $this;
-    }
-
-    public function getVersion(): string
-    {
-        return $this->version;
     }
 
     protected function execute(): mixed
@@ -117,17 +207,17 @@ class PaymentPlatformAPI
         try {
             $results = $this->client->request($this->getRequestType(), $this->getEndpoint(), $data)->getBody()->getContents();
         } catch (GuzzleException $e) {
-            $results = $e->getMessage();
+            throw new \Exception('API Error : '.$e->getMessage());
         }
 
         return new PaymentPlatformFormatData($results);
 
     }
 
-    public static function getInstance(string $token, string $version = 'v1', bool $sandbox = false): PaymentPlatformAPI
+    public static function getInstance(): PaymentPlatformAPI
     {
         if (! isset(self::$instance)) {
-            self::$instance = new self($token, $version, $sandbox);
+            self::$instance = new self;
         }
 
         return self::$instance;

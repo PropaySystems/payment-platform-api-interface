@@ -15,9 +15,12 @@ trait Address
      * @param  array  $includes  Optional array of related resources to include in the response.
      * @param  string  $version  API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
+     *
+     * @throws \Exception
      */
     public function getContactAddresses(array $filters = [], array $includes = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
@@ -40,9 +43,12 @@ trait Address
      * @param  array  $includes  Optional array of related resources to include in the response.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object.
+     *
+     * @throws \Exception
      */
     public function getContactAddress(string $id, array $includes = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['include' => $includes]),
@@ -65,9 +71,12 @@ trait Address
      * @param  array  $data  An associative array containing the updated contact address details.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
+     *
+     * @throws \Exception
      */
     public function updateContactAddress(string $id, array $data = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
@@ -89,9 +98,12 @@ trait Address
      * @param  array  $data  An associative array containing the details of the contact address to be created.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating the success or details of the created contact address.
+     *
+     * @throws \Exception
      */
     public function createContactAddress(array $data = [], string $version = 'v1'): mixed
     {
+        $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,

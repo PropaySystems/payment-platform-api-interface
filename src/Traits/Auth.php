@@ -2,7 +2,7 @@
 
 namespace PropaySystems\PaymentPlatformApiInterface\Traits;
 
-trait CDV
+trait Auth
 {
     /**
      * Verifies customer data through the CDV (Customer Data Verification) process.
@@ -15,17 +15,14 @@ trait CDV
      * @param  array  $data  Optional associative array of customer data to verify.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
-     *
-     * @throws \Exception
      */
-    public function verifyCDV(array $data = [], string $version = 'v1'): mixed
+    public function login(array $data = [], string $version = 'v1'): mixed
     {
-        $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
         ]);
-        $this->setEndpoint('cdv/verify');
+        $this->setEndpoint('auth/login');
         $this->setRequestType('POST');
 
         return $this->execute();
