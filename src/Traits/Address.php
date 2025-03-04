@@ -18,12 +18,12 @@ trait Address
      *
      * @throws \Exception
      */
-    public function getContactAddresses(array $filters = [], array $includes = [], string $version = 'v1'): mixed
+    public function getContactAddresses(array $filters = [], array $includes = [], string $version = 'v1', $per_page = 15): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
+            'query' => http_build_query(['filter' => $filters, 'include' => $includes, 'per-page' => $per_page]),
         ]);
         $this->setEndpoint('contact-addresses');
         $this->setRequestType('GET');

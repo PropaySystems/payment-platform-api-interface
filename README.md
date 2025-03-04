@@ -17,13 +17,14 @@ composer require propaysystems/payment-platform-api-interface
 ```php
 $client = PaymentPlatformAPI::getInstance() //Singleton
          ->sandbox() //Use sandbox environment
+         ->url('https://example.com') //Set host only if you have a custom host
          ->setVersion('v1')
          ->setCredentials('username', 'password');
          or
         ->setToken('132465789132465789');
 
 //Get all contacts
-$response = $client->getContacts($filters = [], $includes = [], $version = 'v1');
+$response = $client->getContacts($filters = [], $includes = [], $version = 'v1', $per_page = 15)->get();
 
 ```
 
