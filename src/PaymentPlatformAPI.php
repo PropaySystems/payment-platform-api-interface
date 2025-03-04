@@ -40,6 +40,7 @@ class PaymentPlatformAPI
     private array $data;
 
     private string $url;
+
     private bool $sandbox = false;
 
     private ?string $token = null;
