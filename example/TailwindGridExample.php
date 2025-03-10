@@ -2,9 +2,9 @@
 
 //            dump(request()->all(), explode(',', request()->get('sort')), explode(',', request()->get('filters')));
 
-$client = PaymentPlatformAPI::getInstance() //Singleton
-->url('http://payment-platform-api.test/api') //Set host only if you have a custom host
-->setVersion('v1')
+$client = PaymentPlatformAPI::getInstance() // Singleton
+    ->url('http://payment-platform-api.test/api') // Set host only if you have a custom host
+    ->setVersion('v1')
     ->setCredentials('test@test', '123456789');
 
 $filters = array_merge(
