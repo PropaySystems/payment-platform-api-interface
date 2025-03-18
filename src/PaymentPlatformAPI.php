@@ -39,6 +39,8 @@ class PaymentPlatformAPI
 
     private array $data;
 
+    private string $url;
+
     private bool $sandbox = false;
 
     private ?string $token = null;
@@ -67,6 +69,13 @@ class PaymentPlatformAPI
     public function sandbox(): PaymentPlatformAPI
     {
         $this->sandbox = true;
+
+        return $this;
+    }
+
+    public function url($url): PaymentPlatformAPI
+    {
+        $this->url = $url;
 
         return $this;
     }
@@ -163,7 +172,7 @@ class PaymentPlatformAPI
 
     protected function init(): PaymentPlatformAPI
     {
-        self::$baseUrl = $this->sandbox ? self::$sandBoxBaseUrl : self::$baseUrl;
+        self::$baseUrl = $this->url ?? ($this->sandbox ? self::$sandBoxBaseUrl : self::$baseUrl);
 
         if (! $this->hasToken() && ! $this->hasCredentials()) {
             throw new \Exception('No credentials or token provided');

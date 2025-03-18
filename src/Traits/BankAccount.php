@@ -15,19 +15,22 @@ trait BankAccount
      * @param  array  $filters  (Optional) An associative array of filters to apply to the contact retrieval. The array keys
      *                          and values depend on the contact model's attributes and the API's filtering capabilities.
      * @param  array  $includes  (Optional) An array of related resources to include in the response for each contact.
+     * @param  array  $sort  (Optional) An array of sorting options to apply to the contact retrieval.
      * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
+     * @param  int  $per_page  Number of results per page, defaults to 15.
+     * @param  int|null  $page  Page number to retrieve, defaults to null which is interpreted as the first page.
      * @return mixed The response from the API, typically an object or array containing the list of contacts
      *               and any included related resources. The exact return type may vary depending on the implementation
      *               of the `execute` method.
      *
      * @throws \Exception
      */
-    public function getContactBankAccounts(array $filters = [], array $includes = [], string $version = 'v1'): mixed
+    public function contactBankAccounts(array $filters = [], array $includes = [], array $sort = [], string $version = 'v1', int $per_page = 15, ?int $page = null): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
+            'query' => http_build_query(['filter' => $filters, 'include' => $includes, 'sort' => $sort, 'per-page' => $per_page, 'page' => $page ?? 1]),
         ]);
         $this->setEndpoint('contact-bank-account');
         $this->setRequestType('GET');
@@ -53,7 +56,7 @@ trait BankAccount
      *
      * @throws \Exception
      */
-    public function getContactBankAccount(string $id, array $includes = [], string $version = 'v1'): mixed
+    public function contactBankAccount(string $id, array $includes = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);

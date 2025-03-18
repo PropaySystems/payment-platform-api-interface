@@ -15,17 +15,20 @@ trait PaymentFrequencies
      *
      * @param  array  $filters  Optional associative array of filters to apply to the query.
      * @param  array  $includes  Optional array of related resources to include in the response.
+     * @param  array  $sort  (Optional) An array of sorting options to apply to the contact retrieval.
      * @param  string  $version  API version to use for the request, defaults to 'v1'.
+     * @param  int  $per_page  Number of results per page, defaults to 15.
+     * @param  int|null  $page  Page number to retrieve, defaults to null which is interpreted as the first page.
      * @return mixed The response from the API after executing the request.
      *
      * @throws \Exception
      */
-    public function getPaymentFrequencies(array $filters = [], array $includes = [], string $version = 'v1'): mixed
+    public function paymentFrequencies(array $filters = [], array $includes = [], array $sort = [], string $version = 'v1', int $per_page = 15, ?int $page = null): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'query' => http_build_query(['filter' => $filters, 'include' => $includes]),
+            'query' => http_build_query(['filter' => $filters, 'include' => $includes, 'sort' => $sort, 'per-page' => $per_page, 'page' => $page ?? 1]),
         ]);
         $this->setEndpoint('payments/frequencies');
         $this->setRequestType('GET');
@@ -48,7 +51,7 @@ trait PaymentFrequencies
      *
      * @throws \Exception
      */
-    public function getPaymentFrequency(string $id, array $includes = [], string $version = 'v1'): mixed
+    public function paymentFrequency(string $id, array $includes = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
