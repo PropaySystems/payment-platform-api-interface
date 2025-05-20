@@ -63,4 +63,59 @@ trait Bank
 
         return $this->execute();
     }
+
+    /**
+     * Updates a specific bank by ID.
+     *
+     * This method allows for updating the details of a specific bank identified by its unique ID.
+     * It sends a PUT request to the specified endpoint with the updated data. The API version can be specified,
+     * allowing for flexibility with different API versions. The method constructs the request with the provided
+     * data as form parameters and executes the request.
+     *
+     * @param string $id The unique identifier of the bank to update.
+     * @param array $data An associative array containing the updated bank details.
+     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
+     *
+     * @throws \Exception
+     */
+    public function updateBank(string $id, array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'form_params' => $data,
+        ]);
+        $this->setEndpoint('banks/'.$id);
+        $this->setRequestType('PUT');
+
+        return $this->execute();
+    }
+
+    /**
+     * Creates a new bank with the provided data.
+     *
+     * This method sends a POST request to create a new bank using the specified data.
+     * The API version can be specified to target a particular version of the endpoint.
+     * The method constructs the request with the provided data as form parameters and
+     * executes the request.
+     *
+     * @param array $data An associative array containing the details of the bank to create.
+     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
+     *
+     * @throws \Exception
+     */
+    public function createBank(array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'form_params' => $data,
+        ]);
+        $this->setEndpoint('banks');
+        $this->setRequestType('POST');
+
+        return $this->execute();
+    }
 }

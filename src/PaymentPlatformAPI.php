@@ -213,12 +213,7 @@ class PaymentPlatformAPI
     protected function execute(): mixed
     {
         $data = array_merge($this->getData(), ['headers' => $this->headers]);
-        try {
-            $results = $this->client->request($this->getRequestType(), $this->getEndpoint(), $data)->getBody()->getContents();
-        } catch (GuzzleException $e) {
-            throw new \Exception('API Error : '.$e->getMessage());
-        }
-
+        $results = $this->client->request($this->getRequestType(), $this->getEndpoint(), $data)->getBody()->getContents();
         return new PaymentPlatformFormatData($results);
 
     }
