@@ -71,9 +71,9 @@ trait BankBranch
      * identified by its unique ID. The updated data is sent as form parameters in the request.
      * The API version can be specified to target a particular version of the endpoint.
      *
-     * @param string $id The unique identifier of the bank branch to update.
-     * @param array $data An associative array containing the updated bank branch details.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $id  The unique identifier of the bank branch to update.
+     * @param  array  $data  An associative array containing the updated bank branch details.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
      *
      * @throws \Exception
@@ -99,8 +99,8 @@ trait BankBranch
      * The method constructs the request with the provided data as form parameters and
      * executes the request.
      *
-     * @param array $data An associative array containing the details of the bank branch to create.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  array  $data  An associative array containing the details of the bank branch to create.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
      *
      * @throws \Exception
