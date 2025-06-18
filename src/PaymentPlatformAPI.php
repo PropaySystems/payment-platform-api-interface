@@ -43,11 +43,11 @@ class PaymentPlatformAPI
 
     private bool $sandbox = false;
 
-    private ?string $token = null;
+    private ?string $token = '';
 
-    private ?string $username = null;
+    private ?string $username = '';
 
-    private ?string $password = null;
+    private ?string $password = '';
 
     public function __construct()
     {
