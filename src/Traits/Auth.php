@@ -12,8 +12,8 @@ trait Auth
      * provided data, sets the appropriate API endpoint for CDV verification, and performs a POST request.
      * The response from the API, indicating the success or failure of the verification, is then returned.
      *
-     * @param array $data Optional associative array of customer data to verify.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  array  $data  Optional associative array of customer data to verify.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
      */
     public function login(array $data = [], string $version = 'v1'): mixed
@@ -21,7 +21,7 @@ trait Auth
         $this->setData([
             'form_params' => $data,
         ]);
-        $this->setEndpoint($version . '/auth/login');
+        $this->setEndpoint($version.'/auth/login');
         $this->setRequestType('POST');
 
         return $this->execute();
@@ -34,7 +34,7 @@ trait Auth
      * The API version can be specified to target a particular version of the endpoint.
      * It initializes the request, sets the endpoint, and executes the request.
      *
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object containing user details.
      *
      * @throws \Exception If an error occurs during the request execution.
@@ -56,13 +56,15 @@ trait Auth
      * It can be used to set up the connection before performing further operations.
      * The API version can be specified, although it is not utilized in this method.
      *
-     * @param string $version The API version to use for the connection, defaults to 'v1'.
+     * @param  string  $version  The API version to use for the connection, defaults to 'v1'.
      * @return $this The current instance of the class.
+     *
      * @throws \Exception
      */
     public function connection(string $version = 'v1'): mixed
     {
         $this->init();
+
         return $this;
     }
 }
