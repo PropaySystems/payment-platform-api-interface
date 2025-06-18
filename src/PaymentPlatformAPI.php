@@ -3,7 +3,6 @@
 namespace PropaySystems\PaymentPlatformApiInterface;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Address;
 use PropaySystems\PaymentPlatformApiInterface\Traits\AddressType;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Auth;
@@ -214,6 +213,7 @@ class PaymentPlatformAPI
     {
         $data = array_merge($this->getData(), ['headers' => $this->headers]);
         $results = $this->client->request($this->getRequestType(), $this->getEndpoint(), $data)->getBody()->getContents();
+
         return new PaymentPlatformFormatData($results);
 
     }

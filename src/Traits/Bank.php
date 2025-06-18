@@ -72,9 +72,9 @@ trait Bank
      * allowing for flexibility with different API versions. The method constructs the request with the provided
      * data as form parameters and executes the request.
      *
-     * @param string $id The unique identifier of the bank to update.
-     * @param array $data An associative array containing the updated bank details.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $id  The unique identifier of the bank to update.
+     * @param  array  $data  An associative array containing the updated bank details.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
      *
      * @throws \Exception
@@ -100,8 +100,8 @@ trait Bank
      * The method constructs the request with the provided data as form parameters and
      * executes the request.
      *
-     * @param array $data An associative array containing the details of the bank to create.
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  array  $data  An associative array containing the details of the bank to create.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
      *
      * @throws \Exception
