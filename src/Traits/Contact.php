@@ -133,7 +133,7 @@ trait Contact
      * The API version can be specified to target a particular version of the endpoint.
      * It initializes the request, sets the endpoint, and executes the request.
      *
-     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object containing the allowed statuses.
      *
      * @throws \Exception If an error occurs during the request execution.

@@ -13,7 +13,7 @@ trait Status
      * and returns the response. This can be used to obtain various address types available in the system,
      * potentially filtered or enhanced with additional related resources.
      *
-     * @param string $version API version to use for the request, defaults to 'v1'.
+     * @param  string  $version  API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
      *
      * @throws \Exception
