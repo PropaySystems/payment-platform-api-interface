@@ -118,4 +118,29 @@ trait Bank
 
         return $this->execute();
     }
+
+    /**
+     * Retrieves the allowed statuses for banks.
+     *
+     * This method sends a GET request to fetch the list of allowed statuses for banks.
+     * The API version can be specified to target a particular version of the endpoint.
+     * It initializes the request, sets the endpoint, and executes the request.
+     *
+     * @param string $version The API version to use for the request, defaults to 'v1'.
+     * @return mixed The response from the API after executing the request, typically an array or object containing the allowed statuses.
+     *
+     * @throws \Exception If an error occurs during the request execution.
+     */
+    public function allowedStatuses(string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'query' => http_build_query([]),
+        ]);
+        $this->setEndpoint('banks/allowedStatuses');
+        $this->setRequestType('GET');
+
+        return $this->execute();
+    }
 }
