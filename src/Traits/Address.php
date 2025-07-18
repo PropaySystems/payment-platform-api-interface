@@ -129,7 +129,7 @@ trait Address
      *
      * @throws \Exception If an error occurs during the request execution.
      */
-    public function allowedStatuses(string $version = 'v1'): mixed
+    public function allowedContactAddressStatuses(string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);

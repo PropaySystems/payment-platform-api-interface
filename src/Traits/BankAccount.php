@@ -139,7 +139,7 @@ trait BankAccount
      *
      * @throws \Exception If an error occurs during the request execution.
      */
-    public function allowedStatuses(string $version = 'v1'): mixed
+    public function allowedContactBankAccountStatuses(string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
