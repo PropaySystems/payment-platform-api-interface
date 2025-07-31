@@ -12,7 +12,7 @@ You can install the package via composer:
 composer require propaysystems/payment-platform-api-interface
 ```
 
-## Usage
+### PHP Usage
 
 ```php
 $client = PaymentPlatformAPI::getInstance() //Singleton
@@ -30,8 +30,38 @@ Sorting is ascending by defailt  and can be reversed by adding a hyphen (-) to t
 
 Example:
 $sort = ['name', '-created_at'];
+
+```
+### Laravel Usage
+Create config file
+```php
+return [
+    'url' => env('PAYMENT_PLATFORM_API_URL', ''),
+    'version' => env('PAYMENT_PLATFORM_API_VERSION', 'v1'),
+    'username' => env('PAYMENT_PLATFORM_API_USERNAME', 'secret'),
+    'password' => env('PAYMENT_PLATFORM_API_PASSWORD', 'password'),
+];
 ```
 
+Register in the boot method of the app service provider
+```php
+
+$this->app->bind(PaymentPlatformAPI::class, function() {
+    return PaymentPlatformAPI::getInstance()
+        ->url(config('custom.payment-platform-api.url'))
+        ->setVersion(config('custom.payment-platform-api.version'))
+        ->setCredentials(
+            config('custom.payment-platform-api.username'), 
+            config('custom.payment-platform-api.password')
+        );
+});
+
+```
+
+Use the singleton class in your application
+```php
+$client = app(PaymentPlatformAPI::class);
+```
 ## Testing
 
 ```bash
