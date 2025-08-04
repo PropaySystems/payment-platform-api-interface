@@ -6,7 +6,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PropaySystems\PaymentPlatformApiInterface\PaymentPlatformAPI;
 
-//uses()
+// uses()
 //    ->beforeEach(function () {
 //        $mock_create_bank_account_response = '{"data":{}}';
 //

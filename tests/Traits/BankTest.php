@@ -18,6 +18,7 @@ test('banks calls expected methods and returns result', function () {
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) use ($filters, $includes, $sort, $per_page, $page) {
         parse_str($data['query'], $queryArray);
+
         return $queryArray['filter'] === $filters
             && $queryArray['include'] === $includes
             && $queryArray['sort'] === $sort
@@ -47,6 +48,7 @@ test('bank calls expected methods and returns result', function () {
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) use ($includes) {
         parse_str($data['query'], $queryArray);
+
         return $queryArray['include'] === $includes;
     }))->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with('banks/show/'.$id)->willReturnSelf();
@@ -113,6 +115,7 @@ test('allowedBankStatuses calls expected methods and returns result', function (
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) {
         parse_str($data['query'], $queryArray);
+
         return $queryArray === [];
     }))->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with('banks/allowedStatuses')->willReturnSelf();
@@ -124,4 +127,3 @@ test('allowedBankStatuses calls expected methods and returns result', function (
     $result = $mock->allowedBankStatuses($version);
     expect($result)->toBe($expectedResult);
 });
-
