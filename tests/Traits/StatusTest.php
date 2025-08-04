@@ -13,6 +13,7 @@ test('statuses calls expected methods and returns result', function () {
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) {
         parse_str($data['query'], $queryArray);
+
         return $queryArray === [];
     }))->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with('statuses')->willReturnSelf();
@@ -24,4 +25,3 @@ test('statuses calls expected methods and returns result', function () {
     $result = $mock->statuses($version);
     expect($result)->toBe($expectedResult);
 });
-
