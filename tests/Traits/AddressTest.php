@@ -1,5 +1,4 @@
 <?php
-
 use PropaySystems\PaymentPlatformApiInterface\PaymentPlatformAPI;
 
 test('contactAddresses calls expected methods and returns result', function () {
