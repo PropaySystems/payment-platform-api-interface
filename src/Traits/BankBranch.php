@@ -63,4 +63,83 @@ trait BankBranch
 
         return $this->execute();
     }
+
+    /**
+     * Updates a specific bank branch by ID.
+     *
+     * This method sends a PUT request to update the details of a specific bank branch
+     * identified by its unique ID. The updated data is sent as form parameters in the request.
+     * The API version can be specified to target a particular version of the endpoint.
+     *
+     * @param  string  $id  The unique identifier of the bank branch to update.
+     * @param  array  $data  An associative array containing the updated bank branch details.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
+     * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
+     *
+     * @throws \Exception
+     */
+    public function updateBranch(string $id, array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'form_params' => $data,
+        ]);
+        $this->setEndpoint('bank-branches/'.$id);
+        $this->setRequestType('PUT');
+
+        return $this->execute();
+    }
+
+    /**
+     * Creates a new bank branch with the provided data.
+     *
+     * This method sends a POST request to create a new bank branch using the specified data.
+     * The API version can be specified to target a particular version of the endpoint.
+     * The method constructs the request with the provided data as form parameters and
+     * executes the request.
+     *
+     * @param  array  $data  An associative array containing the details of the bank branch to create.
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
+     * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
+     *
+     * @throws \Exception
+     */
+    public function createBranch(array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'form_params' => $data,
+        ]);
+        $this->setEndpoint('bank-branches');
+        $this->setRequestType('POST');
+
+        return $this->execute();
+    }
+
+    /**
+     * Retrieves the allowed statuses for bank branches.
+     *
+     * This method sends a GET request to fetch the list of allowed statuses for bank branches.
+     * The API version can be specified to target a particular version of the endpoint.
+     * It initializes the request, sets the endpoint, and executes the request.
+     *
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
+     * @return mixed The response from the API after executing the request, typically an array or object containing the allowed statuses.
+     *
+     * @throws \Exception If an error occurs during the request execution.
+     */
+    public function allowedBranchStatuses(string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'query' => http_build_query([]),
+        ]);
+        $this->setEndpoint('bank-branches/allowedStatuses');
+        $this->setRequestType('GET');
+
+        return $this->execute();
+    }
 }
