@@ -186,3 +186,6 @@ test('addressType calls expected methods and returns result', function () {
     $result = $mock->addressType($id, $includes, $version);
     expect($result)->toBe($expectedResult);
 });
+
+
+
