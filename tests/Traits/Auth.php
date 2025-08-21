@@ -50,3 +50,4 @@ test('connection calls init and returns self', function () {
     $result = $mock->connection('v1.0');
     expect($result)->toBe($mock);
 });
+

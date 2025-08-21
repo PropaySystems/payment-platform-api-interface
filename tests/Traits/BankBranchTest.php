@@ -18,7 +18,6 @@ test('branches calls expected methods and returns result', function () {
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) use ($filters, $includes, $sort, $per_page, $page) {
         parse_str($data['query'], $queryArray);
-
         return $queryArray['filter'] === $filters
             && array_values($queryArray['include']) === $includes
             && array_values($queryArray['sort']) === $sort
@@ -48,7 +47,6 @@ test('branch calls expected methods and returns result', function () {
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) use ($includes) {
         parse_str($data['query'], $queryArray);
-
         return array_values($queryArray['include']) === $includes;
     }))->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with('bank-branches/show/'.$id)->willReturnSelf();
@@ -115,7 +113,6 @@ test('allowedBranchStatuses calls expected methods and returns result', function
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) {
         parse_str($data['query'], $queryArray);
-
         return $queryArray === [];
     }))->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with('bank-branches/allowedStatuses')->willReturnSelf();
@@ -127,3 +124,4 @@ test('allowedBranchStatuses calls expected methods and returns result', function
     $result = $mock->allowedBranchStatuses($version);
     expect($result)->toBe($expectedResult);
 });
+
