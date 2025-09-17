@@ -83,6 +83,28 @@ test('updateContact calls expected methods and returns result', function () {
     expect($result)->toBe($expectedResult);
 });
 
+test('bulkUpdateContact calls expected methods and returns result', function () {
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
+        ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
+        ->getMock();
+
+    $id = 'contact-456';
+    $data = ['name' => 'Updated Contacts'];
+    $version = 'v3.0';
+
+    $mock->expects($this->once())->method('init')->willReturnSelf();
+    $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contacts/bulkUpdate/'.$id)->willReturnSelf();
+    $mock->expects($this->once())->method('setRequestType')->with('PUT')->willReturnSelf();
+
+    $expectedResult = 'update-contact-result';
+    $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
+
+    $result = $mock->bulkUpdateContact($id, $data, $version);
+    expect($result)->toBe($expectedResult);
+});
+
 test('createContact calls expected methods and returns result', function () {
     $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
@@ -101,6 +123,27 @@ test('createContact calls expected methods and returns result', function () {
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
     $result = $mock->createContact($data, $version);
+    expect($result)->toBe($expectedResult);
+});
+
+test('bulkCreateContacts calls expected methods and returns result', function () {
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
+        ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
+        ->getMock();
+
+    $data = ['name' => 'New Contacts'];
+    $version = 'v4.0';
+
+    $mock->expects($this->once())->method('init')->willReturnSelf();
+    $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contacts/bulkCreate')->willReturnSelf();
+    $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
+
+    $expectedResult = 'create-bulk-contact-result';
+    $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
+
+    $result = $mock->bulkCreateContacts($data, $version);
     expect($result)->toBe($expectedResult);
 });
 

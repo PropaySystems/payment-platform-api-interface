@@ -99,6 +99,36 @@ trait Contact
     }
 
     /**
+     * Bulk updates specific contact by ID with provided data for a specified API version.
+     *
+     * This method prepares the request to bulk update contacts identified by the given ID with the provided data array.
+     * It sets the API version, configures the data payload as form parameters, sets the endpoint to target the specific
+     * contact by appending the ID to the 'contacts/' endpoint, and specifies the request type as 'PUT'.
+     * Finally, it executes the request and returns the response.
+     *
+     * @param  string  $id  The unique identifier of the contact to update.
+     * @param  array  $data  (Optional) An associative array of data to update the contact with. The array keys and values
+     *                       depend on the contact model's attributes and the API's update capabilities.
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
+     * @return mixed The response from the API, typically an object or array containing the updated contact details.
+     *               The exact return type may vary depending on the implementation of the `execute` method.
+     *
+     * @throws \Exception
+     */
+    public function bulkUpdateContact(string $id, array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'form_params' => $data,
+        ]);
+        $this->setEndpoint('contacts/bulkUpdate/'.$id);
+        $this->setRequestType('PUT');
+
+        return $this->execute();
+    }
+
+    /**
      * Creates a new contact with the provided data for a specified API version.
      *
      * This method prepares the request to create a new contact with the given data array. It sets the API version,
@@ -121,6 +151,34 @@ trait Contact
             'form_params' => $data,
         ]);
         $this->setEndpoint('contacts');
+        $this->setRequestType('POST');
+
+        return $this->execute();
+    }
+
+    /**
+     * Creates a new contact with the provided data for a specified API version.
+     *
+     * This method prepares the request to create a new contact with the given data array. It sets the API version,
+     * configures the data payload as form parameters, sets the endpoint to the 'contacts/' for contact creation,
+     * and specifies the request type as 'POST'. Finally, it executes the request and returns the response.
+     *
+     * @param  array  $data  (Optional) An associative array of data for creating the contact. The array keys and values
+     *                       should match the contact model's attributes and the API's creation capabilities.
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
+     * @return mixed The response from the API, typically an object or array containing the details of the newly created contact.
+     *               The exact return type may vary depending on the implementation of the `execute` method.
+     *
+     * @throws \Exception
+     */
+    public function bulkCreateContacts(array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'form_params' => $data,
+        ]);
+        $this->setEndpoint('contacts/bulkCreate');
         $this->setRequestType('POST');
 
         return $this->execute();
