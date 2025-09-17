@@ -150,4 +150,28 @@ trait Contact
 
         return $this->execute();
     }
+
+    /**
+     * Retrieves all abbreviated names of contacts for a specified API version.
+     *
+     * This method sends a GET request to the 'contacts/abbreviatedNames' endpoint to fetch a list of all abbreviated names.
+     * It initializes the request, sets the API version, and executes the request.
+     *
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
+     * @return mixed The response from the API, typically an object or array containing the list of abbreviated names.
+     *
+     * @throws \Exception If an error occurs during the request execution.
+     */
+    public function getAllAbbreviatedNames(string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'query' => http_build_query([]),
+        ]);
+        $this->setEndpoint('contacts/abbreviatedNames');
+        $this->setRequestType('GET');
+
+        return $this->execute();
+    }
 }
