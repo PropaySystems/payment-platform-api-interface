@@ -66,20 +66,21 @@ test('updateContactProduct calls expected methods and returns result', function 
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
         ->getMock();
 
-    $id = 'product-456';
+    $contactId = 'contact-456';
+    $productId = 'product-123';
     $data = ['name' => 'Updated Product'];
     $version = 'v3.0';
 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-product/'.$id)->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-product/'.$contactId.'/'.$productId)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('PUT')->willReturnSelf();
 
     $expectedResult = 'update-contact-product-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->updateContactProduct($id, $data, $version);
+    $result = $mock->updateContactProduct($contactId, $productId, $data, $version);
     expect($result)->toBe($expectedResult);
 });
 
@@ -89,18 +90,19 @@ test('createContactProduct calls expected methods and returns result', function 
         ->getMock();
 
     $data = ['name' => 'New Product'];
+    $id = 'contact-123';
     $version = 'v4.0';
 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-product')->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-product/'.$id)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
 
     $expectedResult = 'create-contact-product-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->createContactProduct($data, $version);
+    $result = $mock->createContactProduct($id, $data, $version);
     expect($result)->toBe($expectedResult);
 });
 

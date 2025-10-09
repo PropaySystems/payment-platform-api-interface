@@ -79,14 +79,14 @@ trait Product
      *
      * @throws \Exception
      */
-    public function updateContactProduct(string $id, array $data = [], string $version = 'v1'): mixed
+    public function updateContactProduct(string $id, string $productId, array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
         ]);
-        $this->setEndpoint('contact-product/'.$id);
+        $this->setEndpoint('contact-product/'.$id.'/'.$productId);
         $this->setRequestType('PUT');
 
         return $this->execute();
@@ -100,20 +100,21 @@ trait Product
      * a particular version of the endpoint. The method constructs the request with the provided data,
      * sets the appropriate API endpoint, and performs the request to create the contact product.
      *
+     * @param  string  $id  The unique identifier of the contact product to update.
      * @param  array  $data  The data to create the contact product with.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
      *
      * @throws \Exception
      */
-    public function createContactProduct(array $data = [], string $version = 'v1'): mixed
+    public function createContactProduct(string $id, array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
         ]);
-        $this->setEndpoint('contact-product');
+        $this->setEndpoint('contact-product/'.$id);
         $this->setRequestType('POST');
 
         return $this->execute();
