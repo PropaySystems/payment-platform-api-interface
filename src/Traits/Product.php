@@ -100,7 +100,7 @@ trait Product
      * a particular version of the endpoint. The method constructs the request with the provided data,
      * sets the appropriate API endpoint, and performs the request to create the contact product.
      *
-     * @param string $id The unique identifier of the contact product to update.
+     * @param  string  $id  The unique identifier of the contact product to update.
      * @param  array  $data  The data to create the contact product with.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request.
