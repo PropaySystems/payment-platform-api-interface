@@ -79,14 +79,14 @@ trait Product
      *
      * @throws \Exception
      */
-    public function updateContactProduct(string $id, array $data = [], string $version = 'v1'): mixed
+    public function updateContactProduct(string $id, string $productId, array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
         ]);
-        $this->setEndpoint('contact-product/'.$id);
+        $this->setEndpoint('contact-product/'.$id.'/'.$productId);
         $this->setRequestType('PUT');
 
         return $this->execute();
