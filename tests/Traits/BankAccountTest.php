@@ -109,9 +109,7 @@ test('allowedContactBankAccountStatuses calls expected methods and returns resul
     $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
         ->getMock();
-
     $version = 'v5.0';
-
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with($this->callback(function ($data) {
