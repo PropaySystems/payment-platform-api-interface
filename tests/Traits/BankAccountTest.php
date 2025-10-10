@@ -67,20 +67,21 @@ test('updateContactBankAccount calls expected methods and returns result', funct
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
         ->getMock();
 
-    $id = 'bankacc-456';
+    $contactBankAccountId = 'bankacc-456';
+    $contactId = 'contact-123';
     $data = ['account_number' => '1234567890'];
     $version = 'v3.0';
 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-bank-account/'.$id)->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-bank-account/'.$contactId.'/'.$contactBankAccountId)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('PUT')->willReturnSelf();
 
     $expectedResult = 'update-bank-account-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->updateContactBankAccount($id, $data, $version);
+    $result = $mock->updateContactBankAccount($contactId, $contactBankAccountId, $data, $version);
     expect($result)->toBe($expectedResult);
 });
 
