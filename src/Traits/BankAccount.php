@@ -77,7 +77,8 @@ trait BankAccount
      * the ID to the 'contact-bank-account/' endpoint, and specifies the request type as 'PUT'. The method then executes the request and returns
      * the response, which may include the updated details of the bank account.
      *
-     * @param  string  $id  The unique identifier of the bank account to update.
+     * @param  string  $contactNumber  The unique identifier of the contact to update.
+     * @param  string  $contactBankAccountId  The unique identifier of the bank account to update.
      * @param  array  $data  (Optional) An associative array of data for updating the bank account. The array keys and values
      *                       should match the bank account model's attributes and the API's update capabilities.
      * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
@@ -86,14 +87,14 @@ trait BankAccount
      *
      * @throws \Exception
      */
-    public function updateContactBankAccount(string $id, array $data = [], string $version = 'v1'): mixed
+    public function updateContactBankAccount(string $contactNumber, string $contactBankAccountId, array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
         ]);
-        $this->setEndpoint('contact-bank-account/'.$id);
+        $this->setEndpoint('contact-bank-account/'.$contactNumber.'/'.$contactBankAccountId);
         $this->setRequestType('PUT');
 
         return $this->execute();
