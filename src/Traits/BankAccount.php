@@ -107,7 +107,7 @@ trait BankAccount
      * configures the data payload as form parameters, sets the endpoint to 'contact-bank-account/' for bank account creation,
      * and specifies the request type as 'POST'. Finally, it executes the request and returns the response.
      *
-     * @param string $contactNumber The unique identifier of the contact to update.
+     * @param  string  $contactNumber  The unique identifier of the contact to update.
      * @param  array  $data  (Optional) An associative array of data for creating the bank account. The array keys and values
      *                       should match the bank account model's attributes and the API's creation capabilities.
      * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
