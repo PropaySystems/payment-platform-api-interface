@@ -107,6 +107,7 @@ trait BankAccount
      * configures the data payload as form parameters, sets the endpoint to 'contact-bank-account/' for bank account creation,
      * and specifies the request type as 'POST'. Finally, it executes the request and returns the response.
      *
+     * @param string $contactNumber The unique identifier of the contact to update.
      * @param  array  $data  (Optional) An associative array of data for creating the bank account. The array keys and values
      *                       should match the bank account model's attributes and the API's creation capabilities.
      * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
@@ -115,14 +116,14 @@ trait BankAccount
      *
      * @throws \Exception
      */
-    public function createContactBankAccount(array $data = [], string $version = 'v1'): mixed
+    public function createContactBankAccount(string $contactNumber, array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'form_params' => $data,
         ]);
-        $this->setEndpoint('contact-bank-account');
+        $this->setEndpoint('contact-bank-account/'.$contactNumber);
         $this->setRequestType('POST');
 
         return $this->execute();

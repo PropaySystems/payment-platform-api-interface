@@ -90,19 +90,20 @@ test('createContactBankAccount calls expected methods and returns result', funct
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
         ->getMock();
 
+    $contactNumber = 'contact-123';
     $data = ['account_number' => '9876543210'];
     $version = 'v4.0';
 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-bank-account')->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-bank-account/'.$contactNumber)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
 
     $expectedResult = 'create-bank-account-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->createContactBankAccount($data, $version);
+    $result = $mock->createContactBankAccount($contactNumber, $data, $version);
     expect($result)->toBe($expectedResult);
 });
 
