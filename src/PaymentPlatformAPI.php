@@ -185,6 +185,7 @@ class PaymentPlatformAPI
             $this->setHeaders([
                 'Authorization' => 'Bearer '.$this->getToken(),
                 'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
             ]);
         }
 
@@ -201,6 +202,7 @@ class PaymentPlatformAPI
                 $this->setHeaders([
                     'Authorization' => 'Bearer '.$this->getToken(),
                     'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
                 ]);
             } else {
                 // Handle the error scenario
