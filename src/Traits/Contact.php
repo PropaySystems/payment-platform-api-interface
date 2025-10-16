@@ -120,7 +120,7 @@ trait Contact
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contacts/bulkUpdate/'.$id);
         $this->setRequestType('PUT');
@@ -176,7 +176,7 @@ trait Contact
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contacts/bulkCreate');
         $this->setRequestType('POST');
