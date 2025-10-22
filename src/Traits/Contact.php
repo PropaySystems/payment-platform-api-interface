@@ -90,7 +90,7 @@ trait Contact
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contacts/'.$id);
         $this->setRequestType('PUT');
@@ -148,7 +148,7 @@ trait Contact
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contacts');
         $this->setRequestType('POST');

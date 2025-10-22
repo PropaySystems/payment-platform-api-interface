@@ -85,7 +85,7 @@ trait Product
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contact-product/'.$contactId.'/'.$productId);
         $this->setRequestType('PUT');
@@ -113,7 +113,7 @@ trait Product
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contact-product/'.$id);
         $this->setRequestType('POST');

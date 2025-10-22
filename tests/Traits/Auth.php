@@ -10,7 +10,7 @@ test('login calls expected methods and returns result', function () {
     $data = ['email' => 'user@example.com', 'password' => 'secret'];
     $version = 'v2.0';
 
-    $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with($version.'/auth/login')->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
 

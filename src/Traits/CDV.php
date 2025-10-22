@@ -23,7 +23,7 @@ trait CDV
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('cdv/verify');
         $this->setRequestType('POST');

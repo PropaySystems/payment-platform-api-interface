@@ -84,7 +84,7 @@ trait Bank
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('banks/'.$id);
         $this->setRequestType('PUT');
@@ -111,7 +111,7 @@ trait Bank
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('banks');
         $this->setRequestType('POST');
