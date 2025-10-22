@@ -92,7 +92,7 @@ trait BankAccount
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contact-bank-account/'.$contactNumber.'/'.$contactBankAccountId);
         $this->setRequestType('PUT');
@@ -121,7 +121,7 @@ trait BankAccount
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contact-bank-account/'.$contactNumber);
         $this->setRequestType('POST');

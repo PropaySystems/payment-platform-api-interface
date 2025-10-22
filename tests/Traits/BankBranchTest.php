@@ -72,7 +72,7 @@ test('updateBranch calls expected methods and returns result', function () {
 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
-    $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with('bank-branches/'.$id)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('PUT')->willReturnSelf();
 
@@ -93,7 +93,7 @@ test('createBranch calls expected methods and returns result', function () {
 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
-    $mock->expects($this->once())->method('setData')->with(['form_params' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
     $mock->expects($this->once())->method('setEndpoint')->with('bank-branches')->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
 

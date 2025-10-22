@@ -83,7 +83,7 @@ trait Organisation
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('organisations/'.$id);
         $this->setRequestType('PUT');
@@ -110,7 +110,7 @@ trait Organisation
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('organisations');
         $this->setRequestType('POST');

@@ -19,7 +19,7 @@ trait Auth
     public function login(array $data = [], string $version = 'v1'): mixed
     {
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint($version.'/auth/login');
         $this->setRequestType('POST');

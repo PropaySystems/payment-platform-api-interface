@@ -83,7 +83,7 @@ trait BankBranch
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('bank-branches/'.$id);
         $this->setRequestType('PUT');
@@ -110,7 +110,7 @@ trait BankBranch
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('bank-branches');
         $this->setRequestType('POST');

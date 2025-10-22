@@ -82,7 +82,7 @@ trait Address
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contact-addresses/'.$id);
         $this->setRequestType('PUT');
@@ -109,7 +109,7 @@ trait Address
         $this->init();
         $this->setVersion($version);
         $this->setData([
-            'form_params' => $data,
+            'json' => $data,
         ]);
         $this->setEndpoint('contact-addresses');
         $this->setRequestType('POST');
