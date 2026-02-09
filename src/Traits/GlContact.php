@@ -34,4 +34,29 @@ trait GlContact
 
         return $this->execute();
     }
+
+    /**
+     * Retrieves the transaction types.
+     *
+     * This method sends a GET request to fetch the list of transaction types.
+     * The API version can be specified to target a particular version of the endpoint.
+     * It initializes the request, sets the endpoint, and executes the request.
+     *
+     * @param  string  $version  The API version to use for the request, defaults to 'v1'.
+     * @return mixed The response from the API after executing the request, typically an array or object containing the allowed statuses.
+     *
+     * @throws \Exception If an error occurs during the request execution.
+     */
+    public function transactionTypes(string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'query' => http_build_query([]),
+        ]);
+        $this->setEndpoint('gl-contacts/transaction-types');
+        $this->setRequestType('GET');
+
+        return $this->execute();
+    }
 }
