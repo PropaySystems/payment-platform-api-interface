@@ -34,6 +34,4 @@ trait GlContact
 
         return $this->execute();
     }
-
-
 }

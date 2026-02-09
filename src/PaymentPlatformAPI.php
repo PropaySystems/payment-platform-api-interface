@@ -21,7 +21,7 @@ use PropaySystems\PaymentPlatformApiInterface\Traits\Status;
 
 class PaymentPlatformAPI
 {
-    use Address, AddressType, Auth, Bank, BankAccount, BankAccountType, BankBranch, CDV, Contact, Organisation, PaymentFrequencies, PaymentMethod, Product, Status, GlContact;
+    use Address, AddressType, Auth, Bank, BankAccount, BankAccountType, BankBranch, CDV, Contact, GlContact, Organisation, PaymentFrequencies, PaymentMethod, Product, Status;
 
     private static PaymentPlatformAPI $instance;
 
