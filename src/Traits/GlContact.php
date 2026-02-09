@@ -56,7 +56,7 @@ trait GlContact
         ]);
         $this->setEndpoint('gl-contacts/transaction-types');
         $this->setRequestType('GET');
+
         return $this->execute();
     }
-
 }
