@@ -88,19 +88,20 @@ test('createContactAddress calls expected methods and returns result', function 
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
         ->getMock();
 
+    $contactNumber = 'contact-123';
     $data = ['address' => '456 Main St'];
     $version = 'v4';
 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses')->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses/'.$contactNumber)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
 
     $expectedResult = 'create-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->createContactAddress($data, $version);
+    $result = $mock->createContactAddress($contactNumber, $data, $version);
     expect($result)->toBe($expectedResult);
 });
 

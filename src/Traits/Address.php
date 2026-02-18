@@ -97,21 +97,21 @@ trait Address
      * to the 'contact-addresses' endpoint with the provided data. The API version can be specified, allowing
      * for the use of different versions of the API. The method constructs the request with the provided data
      * as form parameters and executes the request.
-     *
+     * @param string $id The unique identifier of the contact product to update.
      * @param  array  $data  An associative array containing the details of the contact address to be created.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating the success or details of the created contact address.
      *
      * @throws \Exception
      */
-    public function createContactAddress(array $data = [], string $version = 'v1'): mixed
+    public function createContactAddress(string $id, array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'json' => $data,
         ]);
-        $this->setEndpoint('contact-addresses');
+        $this->setEndpoint('contact-addresses/'.$id);
         $this->setRequestType('POST');
 
         return $this->execute();
