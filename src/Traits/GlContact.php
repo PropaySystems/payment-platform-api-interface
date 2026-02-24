@@ -59,4 +59,85 @@ trait GlContact
 
         return $this->execute();
     }
+
+    /**
+     * * Creates a new contact credit journal full write-off invoice with the specified details.
+     * *
+     * * This method allows for the creation of a new contact credit journal full write-off invoice by sending a POST request
+     * * to the specified endpoint with the data provided. The API version can be specified to use
+     * * a particular version of the endpoint. The method constructs the request with the provided data,
+     * * sets the appropriate API endpoint, and performs the request to create the contact credit journal full write-off invoice.
+     * *
+     * * @param array $data The data to create the contact credit journal full write-off invoice with.
+     * * @param string $version The API version to use for the request, defaults to 'v1'.
+     * * @return mixed The response from the API after executing the request.
+     * *
+     * * @throws \Exception
+     */
+    public function createCreditJournalFullWriteOffInvoice(array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'json' => $data,
+        ]);
+        $this->setEndpoint('gl-contacts/credit-journal-full-write-off-invoice/');
+        $this->setRequestType('POST');
+
+        return $this->execute();
+    }
+
+    /**
+     * * Creates a new contact credit note with the specified details.
+     * *
+     * * This method allows for the creation of a new contact credit note by sending a POST request
+     * * to the specified endpoint with the data provided. The API version can be specified to use
+     * * a particular version of the endpoint. The method constructs the request with the provided data,
+     * * sets the appropriate API endpoint, and performs the request to create the contact credit note.
+     * *
+     * * @param array $data The data to create the contact credit note with.
+     * * @param string $version The API version to use for the request, defaults to 'v1'.
+     * * @return mixed The response from the API after executing the request.
+     * *
+     * * @throws \Exception
+     */
+    public function createCreditNote(array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'json' => $data,
+        ]);
+        $this->setEndpoint('gl-contacts/credit-note/');
+        $this->setRequestType('POST');
+
+        return $this->execute();
+    }
+
+    /**
+     * * Creates a new contact invoice with the specified details.
+     * *
+     * * This method allows for the creation of a new contact invoice by sending a POST request
+     * * to the specified endpoint with the data provided. The API version can be specified to use
+     * * a particular version of the endpoint. The method constructs the request with the provided data,
+     * * sets the appropriate API endpoint, and performs the request to create the contact invoice.
+     * *
+     * * @param array $data The data to create the contact invoice with.
+     * * @param string $version The API version to use for the request, defaults to 'v1'.
+     * * @return mixed The response from the API after executing the request.
+     * *
+     * * @throws \Exception
+     */
+    public function createInvoice(array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'json' => $data,
+        ]);
+        $this->setEndpoint('gl-contacts/invoice/');
+        $this->setRequestType('POST');
+
+        return $this->execute();
+    }
 }

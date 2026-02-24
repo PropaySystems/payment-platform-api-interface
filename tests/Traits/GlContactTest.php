@@ -59,3 +59,86 @@ test('transaction types calls expected methods and returns result', function () 
     $result = $mock->transactionTypes($version);
     expect($result)->toBe($expectedResult);
 });
+
+test('create invoice calls expected methods and returns result', function () {
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
+        ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
+        ->getMock();
+
+    $data = [
+        'contact_id' => 12,
+        'amount' => 500.00,
+        'description' => 'Invoice for service rendered',
+        'user_id' => 5,
+        'actioned_by' => 'Jane Smith',
+    ];
+    $version = 'v1.0';
+
+    $mock->expects($this->once())->method('init')->willReturnSelf();
+    $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('gl-contacts/invoice/')->willReturnSelf(); // Fixed endpoint
+    $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
+
+    $expectedResult = 'invoice-created-response';
+    $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
+
+    $result = $mock->createInvoice($data, $version);
+    expect($result)->toBe($expectedResult);
+});
+
+test('create credit note calls expected methods and returns result', function () {
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
+        ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
+        ->getMock();
+
+    $data = [
+        'contact_id' => 45,
+        'credit_note_number' => 'CN000123',
+        'reason' => 'Customer refund',
+        'amount' => 150.00,
+        'user_id' => 5,
+        'actioned_by' => 'John Doe',
+    ];
+    $version = 'v2.0';
+
+    $mock->expects($this->once())->method('init')->willReturnSelf();
+    $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('gl-contacts/credit-note/')->willReturnSelf();
+    $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
+
+    $expectedResult = 'credit-note-created-response';
+    $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
+
+    $result = $mock->createCreditNote($data, $version);
+    expect($result)->toBe($expectedResult);
+});
+
+test('create credit journal full write-off invoice calls expected methods and returns result', function () {
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
+        ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
+        ->getMock();
+
+    $data = [
+        'ids' => [10, 11, 12],
+        'journal_reason' => 'INVWONP',
+        'user_id' => 5,
+        'actioned_by' => 'Jane Smith',
+        'reason' => 'Duplicate invoice entry',
+        'note' => 'Year-end cleanup batch',
+    ];
+    $version = 'v1';
+
+    $mock->expects($this->once())->method('init')->willReturnSelf();
+    $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('gl-contacts/credit-journal-full-write-off-invoice/')->willReturnSelf();
+    $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
+
+    $expectedResult = 'credit-journal-write-off-response';
+    $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
+
+    $result = $mock->createCreditJournalFullWriteOffInvoice($data, $version);
+    expect($result)->toBe($expectedResult);
+});
