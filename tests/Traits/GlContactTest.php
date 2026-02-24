@@ -66,15 +66,15 @@ test('create invoice calls expected methods and returns result', function () {
         ->getMock();
 
     $data = [
-        'user_id'              => 10,
-        'contact_i d'           => 1,
-        'contact_product_id'   => 2,
-        'payment_method_id'    => 3,
-        'amount'               => 100.5,
-        'period'               => '202406',
-        'invoice_restrike_date'=> '2024-06-15',
-        'actioned_by'          => 'John Doe',
-        'note'                 => 'Payment for services rendered.',
+        'user_id' => 10,
+        'contact_i d' => 1,
+        'contact_product_id' => 2,
+        'payment_method_id' => 3,
+        'amount' => 100.5,
+        'period' => '202406',
+        'invoice_restrike_date' => '2024-06-15',
+        'actioned_by' => 'John Doe',
+        'note' => 'Payment for services rendered.',
     ];
     $version = 'v1.0';
 
@@ -97,10 +97,10 @@ test('create credit note calls expected methods and returns result', function ()
         ->getMock();
 
     $data = [
-        'id'          => 10,
-        'user_id'     => 5,
+        'id' => 10,
+        'user_id' => 5,
         'actioned_by' => 'Jane Smith',
-        'note'        => 'Credit for invoice #1234',
+        'note' => 'Credit for invoice #1234',
     ];
 
     $version = 'v2.0';
@@ -124,12 +124,12 @@ test('create credit journal full write-off invoice calls expected methods and re
         ->getMock();
 
     $data = [
-        'ids'            => [10, 11, 12],
+        'ids' => [10, 11, 12],
         'journal_reason' => 'INVWONP',
-        'user_id'        => 5,
-        'actioned_by'    => 'Jane Smith',
-        'reason'         => 'Duplicate invoice entry',
-        'note'           => 'Year-end cleanup batch',
+        'user_id' => 5,
+        'actioned_by' => 'Jane Smith',
+        'reason' => 'Duplicate invoice entry',
+        'note' => 'Year-end cleanup batch',
     ];
 
     $version = 'v1';
@@ -146,4 +146,3 @@ test('create credit journal full write-off invoice calls expected methods and re
     $result = $mock->createCreditJournalFullWriteOffInvoice($data, $version);
     expect($result)->toBe($expectedResult);
 });
-
