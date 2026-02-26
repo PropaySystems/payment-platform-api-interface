@@ -51,7 +51,7 @@ test('contactAddress calls expected methods and returns result', function () {
 
         return $queryArray['include'] === $includes;
     }))->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses/show/' . $id)->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses/show/'.$id)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('GET')->willReturnSelf();
 
     $expectedResult = 'address-result';
@@ -74,7 +74,7 @@ test('updateContactAddress calls expected methods and returns result', function 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses/' . $contactNumber . '/' . $contactAddressId)->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses/'.$contactNumber.'/'.$contactAddressId)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('PUT')->willReturnSelf();
 
     $expectedResult = 'update-result';
@@ -96,7 +96,7 @@ test('createContactAddress calls expected methods and returns result', function 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses/' . $contactNumber)->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-addresses/'.$contactNumber)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('POST')->willReturnSelf();
 
     $expectedResult = 'create-result';
@@ -179,7 +179,7 @@ test('addressType calls expected methods and returns result', function () {
 
         return $queryArray['include'] === $includes;
     }))->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('address-types/show/' . $id)->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('address-types/show/'.$id)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('GET')->willReturnSelf();
 
     $expectedResult = 'address-type-result';
