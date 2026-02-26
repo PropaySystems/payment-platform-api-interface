@@ -70,21 +70,22 @@ trait Address
      * allowing for flexibility with different API versions. The method constructs the request with the provided
      * data as form parameters and executes the request.
      *
-     * @param  string  $id  The unique identifier of the contact address to update.
+     * @param string $contactNumber The unique identifier of the contact to update.
+     * @param string $contactAddressId The unique identifier of the bank account to update.
      * @param  array  $data  An associative array containing the updated contact address details.
      * @param  string  $version  The API version to use for the request, defaults to 'v1'.
      * @return mixed The response from the API after executing the request, typically an array or object indicating success or failure.
      *
      * @throws \Exception
      */
-    public function updateContactAddress(string $id, array $data = [], string $version = 'v1'): mixed
+    public function updateContactAddress(string $contactNumber, string $contactAddressId, array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'json' => $data,
         ]);
-        $this->setEndpoint('contact-addresses/'.$id);
+        $this->setEndpoint('contact-addresses/'.$contactNumber.'/'.$contactAddressId);
         $this->setRequestType('PUT');
 
         return $this->execute();
