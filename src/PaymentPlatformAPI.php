@@ -13,6 +13,7 @@ use PropaySystems\PaymentPlatformApiInterface\Traits\BankBranch;
 use PropaySystems\PaymentPlatformApiInterface\Traits\CDV;
 use PropaySystems\PaymentPlatformApiInterface\Traits\CDVProPayVerify;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Contact;
+use PropaySystems\PaymentPlatformApiInterface\Traits\GlContact;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Organisation;
 use PropaySystems\PaymentPlatformApiInterface\Traits\PaymentFrequencies;
 use PropaySystems\PaymentPlatformApiInterface\Traits\PaymentMethod;
@@ -21,7 +22,7 @@ use PropaySystems\PaymentPlatformApiInterface\Traits\Status;
 
 class PaymentPlatformAPI
 {
-    use Address, AddressType, Auth, Bank, BankAccount, BankAccountType, BankBranch, CDV, CDVProPayVerify, Contact, Organisation, PaymentFrequencies, PaymentMethod, Product, Status;
+    use Address, AddressType, Auth, Bank, BankAccount, BankAccountType, BankBranch, CDV, CDVProPayVerify, Contact, GlContact, Organisation, PaymentFrequencies, PaymentMethod, Product, Status;
 
     private static PaymentPlatformAPI $instance;
 
