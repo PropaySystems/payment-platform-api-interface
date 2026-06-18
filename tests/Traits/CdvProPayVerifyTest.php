@@ -19,6 +19,6 @@ test('verifyCDV calls expected methods and returns result', function () {
     $expectedResult = 'cdv-verification-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->verifyCDVProPayVerify($data, $version);
+    $result = $mock->cdvProPayVerify($data, $version);
     expect($result)->toBe($expectedResult);
 });

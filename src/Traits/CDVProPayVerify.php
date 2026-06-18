@@ -18,7 +18,7 @@ trait CDVProPayVerify
      *
      * @throws \Exception
      */
-    public function verifyCDVProPayVerify(array $data = [], string $version = 'v1'): mixed
+    public function cdvProPayVerify(array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
