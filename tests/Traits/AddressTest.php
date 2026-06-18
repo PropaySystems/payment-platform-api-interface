@@ -131,7 +131,7 @@ test('allowedContactAddressStatuses calls expected methods and returns result', 
 });
 
 test('addressTypes calls expected methods and returns result', function () {
-    $mock = $this->getMockBuilder(\PropaySystems\PaymentPlatformApiInterface\PaymentPlatformAPI::class)
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
         ->getMock();
 
@@ -164,7 +164,7 @@ test('addressTypes calls expected methods and returns result', function () {
 });
 
 test('addressType calls expected methods and returns result', function () {
-    $mock = $this->getMockBuilder(\PropaySystems\PaymentPlatformApiInterface\PaymentPlatformAPI::class)
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
         ->getMock();
 
