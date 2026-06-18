@@ -13,6 +13,7 @@ use PropaySystems\PaymentPlatformApiInterface\Traits\BankBranch;
 use PropaySystems\PaymentPlatformApiInterface\Traits\CDV;
 use PropaySystems\PaymentPlatformApiInterface\Traits\CDVProPayVerify;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Contact;
+use PropaySystems\PaymentPlatformApiInterface\Traits\GlContact;
 use PropaySystems\PaymentPlatformApiInterface\Traits\Organisation;
 use PropaySystems\PaymentPlatformApiInterface\Traits\PaymentFrequencies;
 use PropaySystems\PaymentPlatformApiInterface\Traits\PaymentMethod;
