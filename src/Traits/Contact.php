@@ -208,5 +208,4 @@ trait Contact
 
         return $this->execute();
     }
-
 }
