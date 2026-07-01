@@ -95,7 +95,7 @@ test('bulkUpdateContact calls expected methods and returns result', function () 
     $mock->expects($this->once())->method('init')->willReturnSelf();
     $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
     $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contacts/bulkUpdate/'.$id)->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contacts/bulkUpdate')->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('PUT')->willReturnSelf();
 
     $expectedResult = 'update-contact-result';
