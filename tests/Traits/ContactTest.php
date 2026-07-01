@@ -101,7 +101,7 @@ test('bulkUpdateContact calls expected methods and returns result', function () 
     $expectedResult = 'update-contact-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->bulkUpdateContact($id, $data, $version);
+    $result = $mock->bulkUpdateContact($data, $version);
     expect($result)->toBe($expectedResult);
 });
 
