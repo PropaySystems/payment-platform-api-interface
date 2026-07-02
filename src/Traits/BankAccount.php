@@ -12,7 +12,7 @@ trait BankAccount
      * the API version, and initiates a GET request to the 'contacts' endpoint. The response from the execution of this
      * request is returned, which may include a list of contacts along with any specified related resources.
      *
-     * @param string $id The unique identifier of the contact who's bank accounts to retrieve.
+     * @param  string  $id  The unique identifier of the contact who's bank accounts to retrieve.
      * @param  array  $filters  (Optional) An associative array of filters to apply to the contact retrieval. The array keys
      *                          and values depend on the contact model's attributes and the API's filtering capabilities.
      * @param  array  $includes  (Optional) An array of related resources to include in the response for each contact.
