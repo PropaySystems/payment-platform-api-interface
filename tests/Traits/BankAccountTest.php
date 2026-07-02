@@ -8,6 +8,7 @@ test('contactBankAccounts calls expected methods and returns result', function (
         ->getMock();
 
     $filters = ['active' => true];
+    $contactNumber = 'contact-123';
     $includes = ['contact'];
     $sort = ['created_at'];
     $version = 'v1.1';
@@ -26,13 +27,13 @@ test('contactBankAccounts calls expected methods and returns result', function (
             && $queryArray['per-page'] == $per_page
             && $queryArray['page'] == $page;
     }))->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-bank-account')->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-bank-account/'.$contactNumber)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('GET')->willReturnSelf();
 
     $expectedResult = 'bank-accounts-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->contactBankAccounts($filters, $includes, $sort, $version, $per_page, $page);
+    $result = $mock->contactBankAccounts($contactNumber, $filters, $includes, $sort, $version, $per_page, $page);
     expect($result)->toBe($expectedResult);
 });
 

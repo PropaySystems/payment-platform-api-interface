@@ -12,6 +12,7 @@ trait BankAccount
      * the API version, and initiates a GET request to the 'contacts' endpoint. The response from the execution of this
      * request is returned, which may include a list of contacts along with any specified related resources.
      *
+     * @param  string  $id  The unique identifier of the contact who's bank accounts to retrieve.
      * @param  array  $filters  (Optional) An associative array of filters to apply to the contact retrieval. The array keys
      *                          and values depend on the contact model's attributes and the API's filtering capabilities.
      * @param  array  $includes  (Optional) An array of related resources to include in the response for each contact.
@@ -25,14 +26,14 @@ trait BankAccount
      *
      * @throws \Exception
      */
-    public function contactBankAccounts(array $filters = [], array $includes = [], array $sort = [], string $version = 'v1', int $per_page = 15, ?int $page = null): mixed
+    public function contactBankAccounts(string $contactNumber, array $filters = [], array $includes = [], array $sort = [], string $version = 'v1', int $per_page = 15, ?int $page = null): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['filter' => $filters, 'include' => $includes, 'sort' => $sort, 'per-page' => $per_page, 'page' => $page ?? 1]),
         ]);
-        $this->setEndpoint('contact-bank-account');
+        $this->setEndpoint('contact-bank-account/'.$contactNumber);
         $this->setRequestType('GET');
 
         return $this->execute();
