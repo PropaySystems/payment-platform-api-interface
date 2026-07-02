@@ -99,14 +99,13 @@ trait Contact
     }
 
     /**
-     * Bulk updates specific contact by ID with provided data for a specified API version.
+     * Bulk updates with provided data for a specified API version.
      *
      * This method prepares the request to bulk update contacts identified by the given ID with the provided data array.
      * It sets the API version, configures the data payload as form parameters, sets the endpoint to target the specific
      * contact by appending the ID to the 'contacts/' endpoint, and specifies the request type as 'PUT'.
      * Finally, it executes the request and returns the response.
      *
-     * @param  string  $id  The unique identifier of the contact to update.
      * @param  array  $data  (Optional) An associative array of data to update the contact with. The array keys and values
      *                       depend on the contact model's attributes and the API's update capabilities.
      * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
@@ -115,14 +114,14 @@ trait Contact
      *
      * @throws \Exception
      */
-    public function bulkUpdateContact(string $id, array $data = [], string $version = 'v1'): mixed
+    public function bulkUpdateContact(array $data = [], string $version = 'v1'): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'json' => $data,
         ]);
-        $this->setEndpoint('contacts/bulkUpdate/'.$id);
+        $this->setEndpoint('contacts/bulkUpdate');
         $this->setRequestType('PUT');
 
         return $this->execute();
@@ -204,30 +203,6 @@ trait Contact
             'query' => http_build_query([]),
         ]);
         $this->setEndpoint('contacts/allowedStatuses');
-        $this->setRequestType('GET');
-
-        return $this->execute();
-    }
-
-    /**
-     * Retrieves all abbreviated names of contacts for a specified API version.
-     *
-     * This method sends a GET request to the 'contacts/abbreviatedNames' endpoint to fetch a list of all abbreviated names.
-     * It initializes the request, sets the API version, and executes the request.
-     *
-     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
-     * @return mixed The response from the API, typically an object or array containing the list of abbreviated names.
-     *
-     * @throws \Exception If an error occurs during the request execution.
-     */
-    public function getAllAbbreviatedNames(string $version = 'v1'): mixed
-    {
-        $this->init();
-        $this->setVersion($version);
-        $this->setData([
-            'query' => http_build_query([]),
-        ]);
-        $this->setEndpoint('contacts/abbreviatedNames');
         $this->setRequestType('GET');
 
         return $this->execute();
