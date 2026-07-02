@@ -13,6 +13,7 @@ trait Product
      * and returns the response. This can be used to obtain various contact products available in the system,
      * potentially filtered or enhanced with additional related resources.
      *
+     * @param string $contactNumber The unique identifier of the contact who's productss to retrieve.
      * @param  array  $filters  Optional associative array of filters to apply to the query.
      * @param  array  $includes  Optional array of related resources to include in the response.
      * @param  array  $sort  (Optional) An array of sorting options to apply to the contact retrieval.
@@ -23,14 +24,14 @@ trait Product
      *
      * @throws \Exception
      */
-    public function contactProducts(array $filters = [], array $includes = [], array $sort = [], string $version = 'v1', int $per_page = 15, ?int $page = null): mixed
+    public function contactProducts(string $contactNumber,array $filters = [], array $includes = [], array $sort = [], string $version = 'v1', int $per_page = 15, ?int $page = null): mixed
     {
         $this->init();
         $this->setVersion($version);
         $this->setData([
             'query' => http_build_query(['filter' => $filters, 'include' => $includes, 'sort' => $sort, 'per-page' => $per_page, 'page' => $page ?? 1]),
         ]);
-        $this->setEndpoint('contact-product');
+        $this->setEndpoint('contact-product/'.$contactNumber);
         $this->setRequestType('GET');
 
         return $this->execute();

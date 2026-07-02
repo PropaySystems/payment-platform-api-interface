@@ -8,6 +8,7 @@ test('contactProducts calls expected methods and returns result', function () {
         ->getMock();
 
     $filters = ['active' => true];
+    $contactNumber = 'contact-123';
     $includes = ['details'];
     $sort = ['name'];
     $version = 'v1.0';
@@ -25,13 +26,13 @@ test('contactProducts calls expected methods and returns result', function () {
             && $queryArray['per-page'] == $per_page
             && $queryArray['page'] == $page;
     }))->willReturnSelf();
-    $mock->expects($this->once())->method('setEndpoint')->with('contact-product')->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contact-product/'.$contactNumber)->willReturnSelf();
     $mock->expects($this->once())->method('setRequestType')->with('GET')->willReturnSelf();
 
     $expectedResult = 'contact-products-result';
     $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
 
-    $result = $mock->contactProducts($filters, $includes, $sort, $version, $per_page, $page);
+    $result = $mock->contactProducts($contactNumber, $filters, $includes, $sort, $version, $per_page, $page);
     expect($result)->toBe($expectedResult);
 });
 
