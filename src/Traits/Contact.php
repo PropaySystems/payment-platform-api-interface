@@ -184,6 +184,39 @@ trait Contact
     }
 
     /**
+     * Bulk creates or updates contacts, with their nested records, for a specified API version.
+     *
+     * Each contact is identified by its `contact_number`: one the platform does not hold is
+     * created, one it holds is updated. Nested products and bank accounts are matched by `id`,
+     * then by the caller's own `local_identifier` scoped to that contact, and created when
+     * neither matches — which is what makes this usable before the caller knows any platform
+     * ids at all. `bulkUpdateContact` cannot do that: it skips any nested record with no `id`.
+     *
+     * A product may name a bank account created in the same request through
+     * `contact_bank_account_local_identifier`, since that account has no id yet.
+     *
+     * @param  array  $data  (Optional) An associative array with a `contacts` key holding the contacts
+     *                       to upsert. Keys and values match the contact model's attributes.
+     * @param  string  $version  (Optional) The version of the API to target. Defaults to 'v1'.
+     * @return mixed The response from the API, shaped as `success` and `errors` keyed by the index
+     *               each contact was sent at — the same shape the other bulk endpoints return.
+     *
+     * @throws \Exception
+     */
+    public function bulkUpsertContacts(array $data = [], string $version = 'v1'): mixed
+    {
+        $this->init();
+        $this->setVersion($version);
+        $this->setData([
+            'json' => $data,
+        ]);
+        $this->setEndpoint('contacts/bulkUpsert');
+        $this->setRequestType('PUT');
+
+        return $this->execute();
+    }
+
+    /**
      * Retrieves the allowed statuses for contacts.
      *
      * This method sends a GET request to fetch the list of allowed statuses for contacts.
