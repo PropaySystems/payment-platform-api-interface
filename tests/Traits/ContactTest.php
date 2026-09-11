@@ -105,6 +105,43 @@ test('bulkUpdateContact calls expected methods and returns result', function () 
     expect($result)->toBe($expectedResult);
 });
 
+test('bulkUpsertContacts calls expected methods and returns result', function () {
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
+        ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
+        ->getMock();
+
+    $data = ['contacts' => [['contact_number' => '0000000005012']]];
+    $version = 'v3.0';
+
+    $mock->expects($this->once())->method('init')->willReturnSelf();
+    $mock->expects($this->once())->method('setVersion')->with($version)->willReturnSelf();
+    $mock->expects($this->once())->method('setData')->with(['json' => $data])->willReturnSelf();
+    $mock->expects($this->once())->method('setEndpoint')->with('contacts/bulkUpsert')->willReturnSelf();
+    // PUT, not POST: an upsert is idempotent, so it matches bulkUpdate rather than bulkCreate.
+    $mock->expects($this->once())->method('setRequestType')->with('PUT')->willReturnSelf();
+
+    $expectedResult = 'upsert-contacts-result';
+    $mock->expects($this->once())->method('execute')->willReturn($expectedResult);
+
+    $result = $mock->bulkUpsertContacts($data, $version);
+    expect($result)->toBe($expectedResult);
+});
+
+test('bulkUpsertContacts defaults to v1', function () {
+    $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
+        ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
+        ->getMock();
+
+    $mock->expects($this->once())->method('setVersion')->with('v1')->willReturnSelf();
+    $mock->method('init')->willReturnSelf();
+    $mock->method('setData')->willReturnSelf();
+    $mock->method('setEndpoint')->willReturnSelf();
+    $mock->method('setRequestType')->willReturnSelf();
+    $mock->method('execute')->willReturn(null);
+
+    $mock->bulkUpsertContacts([]);
+});
+
 test('createContact calls expected methods and returns result', function () {
     $mock = $this->getMockBuilder(PaymentPlatformAPI::class)
         ->onlyMethods(['init', 'setVersion', 'setData', 'setEndpoint', 'setRequestType', 'execute'])
